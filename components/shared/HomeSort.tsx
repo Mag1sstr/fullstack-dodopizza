@@ -25,18 +25,6 @@ const HomeSort: FunctionComponent<HomeSortProps> = () => {
             {cat}
           </li>
         ))}
-        {/* <li className="font-medium py-[0.75rem] px-[1.5rem] bg-white shadow rounded-3xl">
-          Напитки
-        </li>
-        <li className="font-medium py-[0.75rem] px-[1.5rem] bg-white shadow rounded-3xl">
-          Все
-        </li>
-        <li className="font-medium py-[0.75rem] px-[1.5rem] bg-white shadow rounded-3xl">
-          Все
-        </li>
-        <li className="font-medium py-[0.75rem] px-[1.5rem] bg-white shadow rounded-3xl">
-          Все
-        </li> */}
       </ul>
 
       <div className="flex items-center gap-2.5 rounded-3xl bg-[#FAFAFA] px-5.5 ">

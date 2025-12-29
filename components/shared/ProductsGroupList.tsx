@@ -2,7 +2,7 @@
 import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
-import { FunctionComponent, useEffect, useMemo } from "react";
+import { FunctionComponent, useEffect } from "react";
 import { useIntersectionObserver } from "usehooks-ts";
 
 interface ProductsGroupListProps {
@@ -20,13 +20,11 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
 
   const { setCategory } = useStore();
 
-  console.log(`Render Section ${title}`, {
-    isIntersecting,
-  });
-
   useEffect(() => {
-    setCategory(title);
-  }, [isIntersecting]);
+    if (isIntersecting) {
+      setCategory(title);
+    }
+  }, [isIntersecting, title, setCategory]);
 
   return (
     <div ref={ref}>
