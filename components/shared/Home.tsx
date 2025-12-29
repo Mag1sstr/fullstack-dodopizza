@@ -31,7 +31,7 @@ const Home: FunctionComponent = () => {
               <label htmlFor="take">Новинки</label>
             </div>
           </div>
-          <div className="mt-7.5">
+          <div className="mt-7.5 flex-1">
             <ProductsGroupList
               title="Пиццы"
               data={[

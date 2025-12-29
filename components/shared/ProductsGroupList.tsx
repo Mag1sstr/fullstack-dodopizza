@@ -32,7 +32,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
       <ul className="grid grid-cols-3 gap-12.5 ">
         {data.map((product) => (
           <li key={product.id}>
-            <div className="w-full h-[260px] py-6 px-9 bg-(--image-bg) rounded-3xl mb-4">
+            <div className="w-full h-[260px] py-6 px-6 bg-(--image-bg) rounded-3xl mb-4">
               <Image
                 className="w-full h-full object-contain"
                 src={product.imageUrl}
