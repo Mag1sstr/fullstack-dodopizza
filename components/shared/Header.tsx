@@ -44,10 +44,15 @@ const Header: FunctionComponent<HeaderProps> = () => {
             </svg>
             Войти
           </button>
-          <button className="bg-[var(--orange)] text-white font-[700] py-[12px] px-[23px] h-[50px] flex items-center gap-3 rounded-xl">
+          <button className="group relative bg-[var(--orange)] text-white font-[700] py-[12px] px-[23px] h-[50px] flex items-center gap-3 rounded-xl cursor-pointer">
+            <img
+              className="w-8 absolute top-[50%] right-6 translate-y-[-50%] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              src="/arrow.svg"
+              alt="arrow"
+            />
             <b>520 ₽</b>
             <span className="block h-full w-[1px] bg-white opacity-25"></span>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 transition-opacity group-hover:opacity-0">
               <svg
                 width="17"
                 height="17"
