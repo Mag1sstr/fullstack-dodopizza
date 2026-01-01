@@ -6,8 +6,18 @@ interface Props {
 }
 const ProductModal: FunctionComponent<Props> = ({ open, setOpen }) => {
   return (
-    <div className="fixed inset-0 bg-(--modal-bg) z-50 flex items-center justify-center">
-      <div className="relative w-[1000px] flex rounded-4xl min-h-[580px] overflow-hidden">
+    <div
+      onMouseDown={() => setOpen(false)}
+      className={`fixed inset-0 bg-(--modal-bg) z-50 flex items-center justify-center invisible opacity-0 transition-all ${
+        open && "opacity-100 visible"
+      } `}
+    >
+      <div
+        onMouseDown={(e) => e.stopPropagation()}
+        className={`relative w-[1000px] flex rounded-4xl min-h-[580px] overflow-hidden top-7 transition-all duration-300 ${
+          open && "top-0"
+        }`}
+      >
         <button className="absolute right-0 top-0">
           <svg
             width="30"
