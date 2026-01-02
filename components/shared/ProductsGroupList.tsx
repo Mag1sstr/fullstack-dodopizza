@@ -20,9 +20,12 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
   //   threshold: 0.4,
   // });
   const intersectionRef = useRef<HTMLDivElement>(null);
-  const intersection = useIntersection(intersectionRef, {
-    threshold: 0.4,
-  });
+  const intersection = useIntersection(
+    intersectionRef as React.RefObject<HTMLElement>,
+    {
+      threshold: 0.4,
+    }
+  );
 
   const { setCategory, userSelectCategory } = useStore();
 

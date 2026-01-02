@@ -7,8 +7,7 @@ interface HomeSortProps {}
 const categories = ["Пиццы", "Напитки", "Закуски", "Кофе"];
 
 const HomeSort: FunctionComponent<HomeSortProps> = () => {
-  const { category, setCategory, setUserSelectCategory, userSelectCategory } =
-    useStore();
+  const { category, setUserSelectCategory } = useStore();
 
   return (
     <div className="sticky top-5 flex justify-between mb-5">
