@@ -2,32 +2,47 @@
 import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
-import { FunctionComponent, useEffect } from "react";
-import { useIntersectionObserver } from "usehooks-ts";
-
+import { FunctionComponent, useEffect, useRef } from "react";
+// import { useIntersectionObserver } from "usehooks-ts";
+import { useIntersection } from "react-use";
 interface ProductsGroupListProps {
   title: string;
   data: IPropduct[];
+  // selectCategory?: string;
 }
 
 const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
   title,
   data,
+  // selectCategory,
 }) => {
-  const { isIntersecting, ref } = useIntersectionObserver({
+  // const { isIntersecting, ref } = useIntersectionObserver({
+  //   threshold: 0.4,
+  // });
+  const intersectionRef = useRef<HTMLDivElement>(null);
+  const intersection = useIntersection(intersectionRef, {
     threshold: 0.4,
   });
 
-  const { setCategory } = useStore();
+  const { setCategory, userSelectCategory } = useStore();
 
   useEffect(() => {
-    if (isIntersecting) {
+    if (intersection?.isIntersecting) {
       setCategory(title);
     }
-  }, [isIntersecting, title, setCategory]);
+  }, [intersection?.isIntersecting, title, setCategory]);
+
+  useEffect(() => {
+    if (userSelectCategory === title) {
+      intersectionRef.current?.scrollIntoView({
+        block: "start",
+        behavior: "smooth",
+      });
+    }
+  }, [userSelectCategory]);
 
   return (
-    <div ref={ref}>
+    <div ref={intersectionRef}>
       <h3 className="text-[2.25rem] font-[800] mb-4">{title}</h3>
       <ul className="grid grid-cols-3 gap-12.5 ">
         {data.map((product) => (

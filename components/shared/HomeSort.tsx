@@ -7,7 +7,8 @@ interface HomeSortProps {}
 const categories = ["Пиццы", "Напитки", "Закуски", "Кофе"];
 
 const HomeSort: FunctionComponent<HomeSortProps> = () => {
-  const { category, setCategory } = useStore();
+  const { category, setCategory, setUserSelectCategory, userSelectCategory } =
+    useStore();
 
   return (
     <div className="sticky top-5 flex justify-between mb-5">
@@ -15,7 +16,7 @@ const HomeSort: FunctionComponent<HomeSortProps> = () => {
         {categories.map((cat) => (
           <li
             key={cat}
-            onClick={() => setCategory(cat)}
+            onClick={() => setUserSelectCategory(cat)}
             className={`font-medium py-[0.75rem] px-[1.5rem] bg-[#FAFAFA] rounded-3xl ${
               category === cat
                 ? "text-(--orange) bg-white shadow "

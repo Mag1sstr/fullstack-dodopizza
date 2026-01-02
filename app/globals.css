@@ -127,6 +127,9 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+html {
+  font-size: clamp(14px, 0.9rem + 0.2vw, 16px);
+}
 body {
   padding: 30px;
   background-color: #ffbf9b;

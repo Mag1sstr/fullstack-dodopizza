@@ -2,7 +2,7 @@
 import { FunctionComponent, useState } from "react";
 import ProductsGroupList from "./ProductsGroupList";
 import HomeSort from "./HomeSort";
-import ProductModal from "./ProductModal";
+import ProductModal from "../modals/ProductModal";
 
 const Home: FunctionComponent = () => {
   const [open, setOpen] = useState(false);
