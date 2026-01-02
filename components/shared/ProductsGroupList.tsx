@@ -8,17 +8,12 @@ import { useIntersection } from "react-use";
 interface ProductsGroupListProps {
   title: string;
   data: IPropduct[];
-  // selectCategory?: string;
 }
 
 const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
   title,
   data,
-  // selectCategory,
 }) => {
-  // const { isIntersecting, ref } = useIntersectionObserver({
-  //   threshold: 0.4,
-  // });
   const intersectionRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(
     intersectionRef as React.RefObject<HTMLElement>,

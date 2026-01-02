@@ -1,14 +1,28 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useState } from "react";
 
-interface ModalsContext {
-  open: boolean;
+type setModal = (b: boolean | ((prev: boolean) => boolean)) => void;
+
+interface IModalsContext {
+  openProductModal: boolean;
+  setOpenProductModal: setModal;
+  openCart: boolean;
+  setOpenCart: setModal;
 }
-export const ModalsContext = createContext({} as ModalsContext);
+export const ModalsContext = createContext({} as IModalsContext);
 
 export default function ModalsContextProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  return <ModalsContext.Provider value={{}}>{children}</ModalsContext.Provider>;
+  const [openProductModal, setOpenProductModal] = useState(false);
+  const [openCart, setOpenCart] = useState(false);
+
+  return (
+    <ModalsContext.Provider
+      value={{ openCart, setOpenCart, openProductModal, setOpenProductModal }}
+    >
+      {children}
+    </ModalsContext.Provider>
+  );
 }
