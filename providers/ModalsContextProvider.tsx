@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from "react";
+"use client";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 type setModal = (b: boolean | ((prev: boolean) => boolean)) => void;
 
@@ -26,3 +27,5 @@ export default function ModalsContextProvider({
     </ModalsContext.Provider>
   );
 }
+
+export const useModals = () => useContext(ModalsContext);

@@ -1,21 +1,17 @@
 "use client";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import ProductsGroupList from "./ProductsGroupList";
 import HomeSort from "./HomeSort";
-import ProductModal from "../modals/ProductModal";
 
 const Home: FunctionComponent = () => {
-  const [open, setOpen] = useState(false);
   return (
     <main className="py-[40px] bg-white">
       <div className="container">
-        <h2 className="text-[2.25rem] mb-[1.25rem] font-[800]">Все пиццы</h2>
+        <h2 className="text-[2.25rem]  font-[800]">Все пиццы</h2>
+      </div>
+      <HomeSort />
 
-        <HomeSort />
-
-        <button onClick={() => setOpen(true)}>Open modal</button>
-        <ProductModal open={open} setOpen={setOpen} />
-
+      <div className="container">
         <div className="flex gap-12">
           <div className="w-[244px]">
             <h3 className="font-bold text-[22px] mb-[1.5rem]">Фильтрация</h3>
