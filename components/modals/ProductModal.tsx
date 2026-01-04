@@ -1,21 +1,21 @@
 "use client";
+import { useModals } from "@/providers/ModalsContextProvider";
 import { FunctionComponent } from "react";
-interface Props {
-  open: boolean;
-  setOpen: (b: boolean) => void;
-}
-const ProductModal: FunctionComponent<Props> = ({ open, setOpen }) => {
+
+const ProductModal: FunctionComponent = () => {
+  const { openProductModal, setOpenProductModal } = useModals();
+
   return (
     <div
-      onMouseDown={() => setOpen(false)}
+      onMouseDown={() => setOpenProductModal(false)}
       className={`fixed inset-0 bg-(--modal-bg) z-50 flex items-center justify-center invisible opacity-0 transition-all ${
-        open && "opacity-100 visible"
+        openProductModal && "opacity-100 visible"
       } `}
     >
       <div
         onMouseDown={(e) => e.stopPropagation()}
         className={`relative w-[1000px] flex rounded-4xl min-h-[580px] overflow-hidden top-7 transition-all duration-300 ${
-          open && "top-0"
+          openProductModal && "top-0"
         }`}
       >
         <button className="absolute right-0 top-0">
