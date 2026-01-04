@@ -41,11 +41,11 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
 
   return (
     <div ref={intersectionRef}>
-      <h3 className="text-[2.25rem] font-[800] mb-4">{title}</h3>
-      <ul className="grid grid-cols-3 gap-12.5 ">
+      <h3 className="text-[2.25rem] font-extrabold mb-4">{title}</h3>
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12.5 ">
         {data.map((product) => (
           <li key={product.id}>
-            <div className="w-full h-[260px] py-6 px-6 bg-(--image-bg) rounded-3xl mb-4">
+            <div className="w-full h-65 py-6 px-6 bg-(--image-bg) rounded-3xl mb-4">
               <Image
                 className="w-full h-full object-contain"
                 src={product.imageUrl}
@@ -55,7 +55,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
               />
             </div>
             <h3 className="font-bold text-[1.40rem] mb-3">{product.title}</h3>
-            <div className="flex items-center justify-between">
+            <div className="flex items-start flex-col justify-between lg:items-center lg:flex-row">
               <p>
                 от <strong>{product.price} ₽</strong>
               </p>
