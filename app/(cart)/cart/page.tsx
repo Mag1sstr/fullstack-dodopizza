@@ -1,7 +1,9 @@
+import Header from "@/components/shared/Header";
+
 function CartPage() {
   return (
     <>
-      <h1>Cart</h1>
+      <Header />
     </>
   );
 }

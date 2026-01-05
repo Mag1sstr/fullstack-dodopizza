@@ -1,11 +1,12 @@
 "use client";
 import { useModals } from "@/providers/ModalsContextProvider";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { FunctionComponent } from "react";
 
 const CartModal: FunctionComponent = () => {
   const { openCart, setOpenCart } = useModals();
-
+  const router = useRouter();
   return (
     <div
       className={clsx(
@@ -167,6 +168,9 @@ const CartModal: FunctionComponent = () => {
             </div>
           </li>
         </ul>
+        <div>
+          <button onClick={() => router.push("/cart")}>Оформить заказ</button>
+        </div>
       </div>
     </div>
   );
