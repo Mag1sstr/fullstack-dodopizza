@@ -1,9 +1,23 @@
 "use client";
 import { useModals } from "@/providers/ModalsContextProvider";
-import { FunctionComponent } from "react";
+import { TPizzaTypes } from "@/types";
+import clsx from "clsx";
+import { FunctionComponent, useState } from "react";
 
+const SIZEZ: { name: string; type: TPizzaTypes }[] = [
+  { name: "Маленькая", type: "sm" },
+  { name: "Средняя", type: "md" },
+  { name: "Большая", type: "lg" },
+];
 const ProductModal: FunctionComponent = () => {
   const { openProductModal, setOpenProductModal } = useModals();
+  const [pizzaSize, setPizzaSize] = useState<TPizzaTypes>("sm");
+
+  const SIZE_TYPE = {
+    sm: "scale-100",
+    md: "scale-130",
+    lg: "scale-155",
+  };
 
   return (
     <div
@@ -35,7 +49,11 @@ const ProductModal: FunctionComponent = () => {
         <div className="w-1/2 bg-white flex items-center justify-center">
           <div className="w-[450px] h-[450px] border rounded-[50%] border-dashed flex items-center justify-center">
             <div className="w-[375px] h-[375px] border rounded-[50%] border-dashed flex items-center justify-center">
-              <img src="/pizza.avif" alt="pizza" />
+              <img
+                className={clsx("transition-all", SIZE_TYPE[pizzaSize])}
+                src="/pizza.avif"
+                alt="pizza"
+              />
             </div>
           </div>
         </div>
@@ -45,15 +63,24 @@ const ProductModal: FunctionComponent = () => {
             25 см, традиционное тесто 25, 380 г
           </p>
           <ul className="bg-(--dark-gray) p-0.5 rounded-3xl flex mb-2.5">
-            <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
-              Маленькая
-            </li>
-            <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
+            {SIZEZ.map((item) => (
+              <li
+                onClick={() => setPizzaSize(item.type)}
+                key={item.name}
+                className={clsx(
+                  "py-2  text-[0.90rem] rounded-3xl flex-1 text-center cursor-pointer",
+                  pizzaSize === item.type && "bg-white"
+                )}
+              >
+                {item.name}
+              </li>
+            ))}
+            {/* <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
               Средняя
             </li>
             <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
               Большая
-            </li>
+            </li> */}
           </ul>
           <ul className="bg-(--dark-gray) p-0.5 rounded-3xl flex mb-7.5">
             <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">

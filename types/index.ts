@@ -5,3 +5,5 @@ export interface IPropduct {
   imageUrl: string;
   items?: { price: number }[];
 }
+
+export type TPizzaTypes = "sm" | "md" | "lg";

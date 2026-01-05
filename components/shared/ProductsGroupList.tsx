@@ -1,4 +1,5 @@
 "use client";
+import { useModals } from "@/providers/ModalsContextProvider";
 import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
@@ -23,6 +24,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
   );
 
   const { setCategory, userSelectCategory } = useStore();
+  const { setOpenProductModal } = useModals();
 
   useEffect(() => {
     if (intersection?.isIntersecting) {
@@ -59,7 +61,10 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
               <p>
                 от <strong>{product.price} ₽</strong>
               </p>
-              <button className="flex items-center justify-center gap-2.5 px-5 py-2.5 bg-(--image-bg) rounded-2xl">
+              <button
+                onClick={() => setOpenProductModal(true)}
+                className="flex items-center justify-center gap-2.5 px-5 py-2.5 bg-(--image-bg) rounded-2xl cursor-pointer text-(--orange)"
+              >
                 <svg
                   width="16"
                   height="16"
