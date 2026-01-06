@@ -1,5 +1,6 @@
 "use client";
 import { useModals } from "@/providers/ModalsContextProvider";
+import { useFilters } from "@/store/useFilters";
 import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
@@ -25,6 +26,22 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
 
   const { setCategory, userSelectCategory } = useStore();
   const { setOpenProductModal } = useModals();
+  const { typeSort, setTypeSort } = useFilters();
+
+  const productsData = typeSort
+    ? [...data].sort((a, b) => {
+        switch (typeSort) {
+          case "asc":
+            return a.price - b.price;
+          case "desc":
+            return b.price - a.price;
+          case "nameAsc":
+            return a.title.localeCompare(b.title);
+          default:
+            return a.price - b.price;
+        }
+      })
+    : data;
 
   useEffect(() => {
     if (intersection?.isIntersecting) {
@@ -45,7 +62,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
     <div ref={intersectionRef}>
       <h3 className="text-[2.25rem] font-extrabold mb-4">{title}</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12.5 ">
-        {data.map((product) => (
+        {productsData.map((product) => (
           <li key={product.id}>
             <div className="w-full h-65 py-6 px-6 bg-(--image-bg) rounded-3xl mb-4">
               <Image

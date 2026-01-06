@@ -1,15 +1,24 @@
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { cn } from "@/lib/utils";
+import { useFilters } from "@/store/useFilters";
+import { TSortTypes } from "@/types";
 import clsx from "clsx";
 import { FunctionComponent, useRef, useState } from "react";
 
 interface SortProps {}
 
-const SORT_TYPES = ["по возрастанию", "по убыванию", "по алфавиту"];
+const SORT_TYPES: { text: string; type: TSortTypes }[] = [
+  { text: "по возрастанию", type: "asc" },
+  { text: "по убыванию", type: "desc" },
+  { text: "по алфавиту", type: "nameAsc" },
+  { text: "по умолчанию", type: null },
+];
 
 const Sort: FunctionComponent<SortProps> = () => {
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState("рейтингу");
+  const [title, setTitle] = useState("по умолчанию");
+
+  const { setTypeSort } = useFilters();
 
   const sortRef = useRef<HTMLDivElement>(null);
 
@@ -47,15 +56,16 @@ const Sort: FunctionComponent<SortProps> = () => {
         )}
       >
         <ul className="flex flex-col">
-          {SORT_TYPES.map((type) => (
+          {SORT_TYPES.map((item) => (
             <li
-              key={type}
+              key={item.text}
               onClick={() => {
-                setTitle(type);
+                setTitle(item.text);
+                setTypeSort(item.type);
               }}
               className="py-2.5 px-5 cursor-pointer hover:bg-(--orange) hover:text-white"
             >
-              {type}
+              {item.text}
             </li>
           ))}
         </ul>
