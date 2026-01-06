@@ -63,7 +63,6 @@ async function main() {
     create: { name: "Пицца" },
   });
 
-  // 👉 Ingredients
   for (const ingredient of ingredientsData) {
     await prismaClient.ingredient.upsert({
       where: { name: ingredient.name },
@@ -72,7 +71,6 @@ async function main() {
     });
   }
 
-  // 👉 Products + ProductItems
   for (const pizza of pizzas) {
     await prismaClient.product.create({
       data: {

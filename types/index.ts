@@ -7,3 +7,4 @@ export interface IPropduct {
 }
 
 export type TPizzaTypes = "sm" | "md" | "lg";
+export type TSortTypes = "asc" | "desc" | "nameAsc";

@@ -2,6 +2,7 @@
 import { FunctionComponent } from "react";
 import ProductsGroupList from "./ProductsGroupList";
 import HomeSort from "./HomeSort";
+import Filters from "./Filters";
 
 const Home: FunctionComponent = () => {
   return (
@@ -13,26 +14,7 @@ const Home: FunctionComponent = () => {
 
       <div className="container">
         <div className="flex gap-12">
-          <div className="w-[244px]">
-            <h3 className="font-bold text-[22px] mb-[1.5rem]">Фильтрация</h3>
-
-            <div className="flex items-center gap-3 mb-4">
-              <input
-                id="take"
-                type="checkbox"
-                className="break-all w-6 h-6 rounded-2xl bg-(--orange) "
-              />
-              <label htmlFor="take">Можно собирать</label>
-            </div>
-            <div className="flex items-center gap-3 mb-4">
-              <input
-                id="take"
-                type="checkbox"
-                className="break-all w-6 h-6 rounded-2xl bg-(--orange) "
-              />
-              <label htmlFor="take">Новинки</label>
-            </div>
-          </div>
+          <Filters />
           <div className="mt-7.5 flex-1">
             <ProductsGroupList
               title="Пиццы"

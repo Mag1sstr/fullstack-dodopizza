@@ -53,7 +53,7 @@ const Sort: FunctionComponent<SortProps> = () => {
               onClick={() => {
                 setTitle(type);
               }}
-              className="py-2.5 px-5 cursor-pointer hover:bg-(--light-orange)"
+              className="py-2.5 px-5 cursor-pointer hover:bg-(--orange) hover:text-white"
             >
               {type}
             </li>

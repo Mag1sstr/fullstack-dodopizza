@@ -146,16 +146,18 @@ input,
 button,
 textarea {
   font-family: inherit;
+  outline: none;
 }
-/* input[type="checkbox"] {
-  width: 24px;
-  height: 24px;
-  background: var(--orange);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
 
 @layer base {
   * {
