@@ -7,6 +7,7 @@ import Image from "next/image";
 import { FunctionComponent, useEffect, useRef } from "react";
 // import { useIntersectionObserver } from "usehooks-ts";
 import { useIntersection } from "react-use";
+import Skeleton from "./Skeleton";
 interface ProductsGroupListProps {
   title: string;
   data: IPropduct[];
@@ -60,6 +61,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
 
   return (
     <div ref={intersectionRef}>
+      <Skeleton type="card" />
       <h3 className="text-[2.25rem] font-extrabold mb-4">{title}</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12.5 ">
         {productsData.map((product) => (
