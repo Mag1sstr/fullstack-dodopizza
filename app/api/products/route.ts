@@ -1,8 +1,16 @@
 import { prismaClient } from "@/prisma/prisma-client";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
-  const products = await prismaClient.product.findMany();
+export async function GET(req: NextRequest) {
+  const searchName = req.nextUrl.searchParams.get("name") || "";
+  const products = await prismaClient.product.findMany({
+    where: {
+      name: {
+        contains: searchName,
+        mode: "insensitive",
+      },
+    },
+  });
   return NextResponse.json(products);
 }
 export async function POST(req: NextRequest) {

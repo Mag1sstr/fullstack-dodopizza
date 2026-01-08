@@ -16,7 +16,7 @@ const AuthModal: FunctionComponent<AuthModalProps> = () => {
   }, [currTab]);
 
   return (
-    <div className="fixed inset-0 bg-(--modal-bg) flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-(--modal-bg) flex items-center justify-center z-50 invisible">
       <div className="w-[450px] p-[40px_45px_47px_45px] bg-white rounded-3xl">
         <div className="flex gap-7.5 mb-7.5">
           <div>
