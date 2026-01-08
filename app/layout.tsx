@@ -5,6 +5,7 @@ import ProductModal from "@/components/modals/ProductModal";
 import CartModal from "@/components/modals/CartModal";
 import Providers from "@/providers/Providers";
 import NextTopLoader from "nextjs-toploader";
+import AuthModal from "@/components/modals/AuthModal";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Providers>
           <ProductModal />
           <CartModal />
+          <AuthModal />
           <NextTopLoader color="#fe5f00" />
           <main className="flex-1 bg-white">{children}</main>
         </Providers>
