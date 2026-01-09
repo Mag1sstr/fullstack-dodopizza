@@ -1,4 +1,6 @@
+"use client";
 import Header from "@/components/shared/Header";
+import Link from "next/link";
 
 function NotFoundPage() {
   return (
@@ -13,7 +15,10 @@ function NotFoundPage() {
               позже
             </p>
             <div className="flex gap-5">
-              <button className="py-3.5 px-5 flex rounded-3xl items-center gap-3 font-bold text-(--orange) border border-(--orange)">
+              <Link
+                href={"/"}
+                className="py-3.5 px-5 flex rounded-3xl items-center gap-3 font-bold text-(--orange) border border-(--orange)"
+              >
                 <svg
                   width="16"
                   height="14"
@@ -37,8 +42,11 @@ function NotFoundPage() {
                   />
                 </svg>
                 На главную
-              </button>
-              <button className="py-3.5 px-5 rounded-3xl border border-[#C7C7C7] font-bold text-[#898989]">
+              </Link>
+              <button
+                onClick={() => location.reload()}
+                className="py-3.5 px-5 rounded-3xl border border-[#C7C7C7] font-bold text-[#898989] cursor-pointer"
+              >
                 Обновить
               </button>
             </div>
