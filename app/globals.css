@@ -131,8 +131,8 @@ html {
   font-size: clamp(14px, 0.9rem + 0.2vw, 16px);
 }
 body {
-  padding: 30px;
-  background-color: #ffbf9b;
+  /* padding: 30px;
+  background-color: #ffbf9b; */
   font-family: "Nunito", sans-serif;
   min-height: 100vh;
 }
@@ -159,6 +159,14 @@ input[type="number"] {
   appearance: textfield;
 }
 
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 .skeleton {
   background: linear-gradient(90deg, #eee 25%, #eeeeee 37%, #eee 63%);
   background-size: 400% 100%;
@@ -171,14 +179,5 @@ input[type="number"] {
   }
   100% {
     background-position: -100% 0;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }

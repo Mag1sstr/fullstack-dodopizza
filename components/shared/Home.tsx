@@ -1,8 +1,7 @@
-"use client";
 import { FunctionComponent } from "react";
-import ProductsGroupList from "./ProductsGroupList";
 import HomeSort from "./HomeSort";
 import Filters from "./Filters";
+import ProductsList from "./ProductsList";
 
 const Home: FunctionComponent = () => {
   return (
@@ -15,90 +14,7 @@ const Home: FunctionComponent = () => {
       <div className="container">
         <div className="flex gap-12">
           <Filters />
-          <div className="mt-7.5 flex-1">
-            <ProductsGroupList
-              title="Пиццы"
-              data={[
-                {
-                  id: 1,
-                  title: "АПепперони",
-                  price: 1999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 2,
-                  title: "ВПепперони",
-                  price: 2999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 3,
-                  title: "ГПепперони",
-                  price: 999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 4,
-                  title: "БПепперони",
-                  price: 5000,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 5,
-                  title: "ЕПепперони",
-                  price: 20999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 6,
-                  title: "ДПепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-              ]}
-            />
-            <ProductsGroupList
-              title="Напитки"
-              data={[
-                {
-                  id: 1,
-                  title: "Пепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 2,
-                  title: "Пепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 3,
-                  title: "Пепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 4,
-                  title: "Пепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 5,
-                  title: "Пепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-                {
-                  id: 6,
-                  title: "Пепперони",
-                  price: 12999,
-                  imageUrl: "/pizza.avif",
-                },
-              ]}
-            />
-          </div>
+          <ProductsList />
         </div>
       </div>
     </main>

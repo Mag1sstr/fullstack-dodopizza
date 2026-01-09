@@ -1,9 +1,11 @@
 export interface IPropduct {
+  categoryId: number;
+  createdAt: string;
   id: number;
-  title: string;
-  price: number;
   imageUrl: string;
-  items?: { price: number }[];
+  name: string;
+  price: number;
+  updatedAt: string;
 }
 
 export type TPizzaTypes = "sm" | "md" | "lg";

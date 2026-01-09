@@ -5,9 +5,8 @@ import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
 import { FunctionComponent, useEffect, useRef } from "react";
-// import { useIntersectionObserver } from "usehooks-ts";
 import { useIntersection } from "react-use";
-import Skeleton from "./Skeleton";
+
 interface ProductsGroupListProps {
   title: string;
   data: IPropduct[];
@@ -37,7 +36,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
           case "desc":
             return b.price - a.price;
           case "nameAsc":
-            return a.title.localeCompare(b.title);
+            return a.name.localeCompare(b.name);
           default:
             return a.price - b.price;
         }
@@ -59,12 +58,13 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
     }
   }, [userSelectCategory]);
 
+  console.log(data);
+
   return (
     <div ref={intersectionRef}>
-      <Skeleton type="card" />
       <h3 className="text-[2.25rem] font-extrabold mb-4">{title}</h3>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12.5 ">
-        {productsData.map((product) => (
+        {productsData?.map((product) => (
           <li key={product.id}>
             <div className="w-full h-65 py-6 px-6 bg-(--image-bg) rounded-3xl mb-4">
               <Image
@@ -75,7 +75,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
                 alt="image"
               />
             </div>
-            <h3 className="font-bold text-[1.40rem] mb-3">{product.title}</h3>
+            <h3 className="font-bold text-[1.40rem] mb-3">{product.name}</h3>
             <div className="flex items-start flex-col justify-between lg:items-center lg:flex-row">
               <p>
                 от <strong>{product.price} ₽</strong>
