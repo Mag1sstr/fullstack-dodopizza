@@ -4,6 +4,7 @@ import { FunctionComponent, useRef, useState } from "react";
 
 const Search: FunctionComponent = () => {
   const [checked, setChecked] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const searchRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -37,6 +38,8 @@ const Search: FunctionComponent = () => {
         </svg>
         <input
           ref={inputRef}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
           className="text-[1rem] outline-none w-full"
           type="search"
           placeholder="Поиск пиццы..."

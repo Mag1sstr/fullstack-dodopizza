@@ -16,7 +16,7 @@ const Skeleton: FunctionComponent<SkeletonProps> = ({
           {[...Array(cardCount)].map((_, i) => (
             <div key={i}>
               <div className="h-[260px] bg-[#FDFDFD]  rounded-3xl px-[2rem] py-[1.37rem] mb-4">
-                <div className="aspect-square w-full  bg-[#F5F5F5] rounded-[50%] skeleton"></div>
+                <div className="aspect-square w-full bg-[#F5F5F5] rounded-[50%] skeleton"></div>
               </div>
               <h1 className="bg-[#F9F9F9] h-7.5 rounded-lg mb-4 skeleton"></h1>
               <p className="bg-[#F9F9F9] h-2.5 rounded-lg mb-2 skeleton"></p>
