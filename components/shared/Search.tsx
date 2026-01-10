@@ -1,6 +1,13 @@
 "use client";
 import { useClickOutside } from "@/hooks/useClickOutside";
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
+import HighlightText from "../ui/HighlightText";
+import clsx from "clsx";
+import { useDebounce } from "@/hooks/useDebounce";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { IPropduct } from "@/types";
+import { MagnifyingGlass } from "react-loader-spinner";
 
 const Search: FunctionComponent = () => {
   const [checked, setChecked] = useState(false);
@@ -14,29 +21,23 @@ const Search: FunctionComponent = () => {
     inputRef.current?.focus();
   };
 
-  const q = "Чизбургер-пицца";
-
-  const HighlightText = ({
-    text,
-    searchValue,
-  }: {
-    text: string;
-    searchValue: string;
-  }) => {
-    const index = text.toLowerCase().indexOf(searchValue.toLowerCase());
-    if (index === -1) return text;
-    return (
-      <p>
-        {text.slice(0, index)}
-        <span className="font-bold bg-[#FFDB8B]">
-          {text.slice(index, index + searchValue.length)}
-        </span>
-        {text.slice(index + searchValue.length, text.length)}
-      </p>
-    );
-  };
+  const { data: products, isLoading } = useQuery({
+    queryKey: ["SearchProducts", searchValue],
+    queryFn: () =>
+      axios
+        .get<IPropduct[]>(process.env.NEXT_PUBLIC_BASE_URL! + "/api/products", {
+          params: { name: searchValue },
+        })
+        .then((res) => res.data),
+  });
 
   useClickOutside(searchRef, setChecked);
+
+  useEffect(() => {
+    if (!checked) {
+      setSearchValue("");
+    }
+  }, [checked]);
 
   return (
     <>
@@ -69,21 +70,37 @@ const Search: FunctionComponent = () => {
 
         <div
           onClick={(e) => e.stopPropagation()}
-          className="absolute top-full left-0 right-0 mt-2.5 py-3 bg-white rounded-2xl overflow-hidden"
+          className={clsx(
+            "absolute top-full left-0 right-0 mt-2.5 py-3 bg-white rounded-2xl overflow-hidden max-h-0 transition-all invisible",
+            !!useDebounce(searchValue).length && "visible max-h-[500px]"
+          )}
         >
+          {isLoading && (
+            <MagnifyingGlass visible={true} height="80" width="80" />
+          )}
           <ul>
-            <li className="bg-[#FFFAF6] px-5 py-2.5 flex items-center gap-3">
-              <img
-                src="/pizza.avif"
-                alt="product-item"
-                className="w-7.5 h-7.5 object-cover"
-              />
+            {products?.map((product) => (
+              <li
+                key={product.id}
+                className="bg-[#FFFAF6] px-5 py-2.5 flex items-center gap-3"
+              >
+                <img
+                  src="/pizza.avif"
+                  alt="product-item"
+                  className="w-7.5 h-7.5 object-cover"
+                />
 
-              <p className="flex gap-3.5 items-center flex-wrap">
-                <HighlightText text={q} searchValue={searchValue} />
-                <span className="text-[14px] text-[#858585]">179₽</span>
-              </p>
-            </li>
+                <div className="flex gap-3.5 items-center flex-wrap">
+                  <HighlightText
+                    text={product.name}
+                    searchValue={searchValue}
+                  />
+                  <span className="text-[14px] text-[#858585]">
+                    {product.price} ₽
+                  </span>
+                </div>
+              </li>
+            ))}
           </ul>
         </div>
       </div>

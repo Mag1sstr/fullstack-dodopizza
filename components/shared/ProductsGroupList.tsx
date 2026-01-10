@@ -58,8 +58,6 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
     }
   }, [userSelectCategory]);
 
-  console.log(data);
-
   return (
     <div ref={intersectionRef}>
       <h3 className="text-[2.25rem] font-extrabold mb-4">{title}</h3>
