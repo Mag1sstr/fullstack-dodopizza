@@ -14,6 +14,28 @@ const Search: FunctionComponent = () => {
     inputRef.current?.focus();
   };
 
+  const q = "Чизбургер-пицца";
+
+  const HighlightText = ({
+    text,
+    searchValue,
+  }: {
+    text: string;
+    searchValue: string;
+  }) => {
+    const index = text.toLowerCase().indexOf(searchValue.toLowerCase());
+    if (index === -1) return text;
+    return (
+      <p>
+        {text.slice(0, index)}
+        <span className="font-bold bg-[#FFDB8B]">
+          {text.slice(index, index + searchValue.length)}
+        </span>
+        {text.slice(index + searchValue.length, text.length)}
+      </p>
+    );
+  };
+
   useClickOutside(searchRef, setChecked);
 
   return (
@@ -22,7 +44,7 @@ const Search: FunctionComponent = () => {
       <div
         ref={searchRef}
         onClick={handleClick}
-        className="flex items-center gap-[12px] py-4 px-5 bg-[var(--search-bg)] rounded-2xl max-w-[764px] w-full z-10"
+        className="relative flex items-center gap-[12px] py-4 px-5 bg-[var(--search-bg)] rounded-2xl max-w-[764px] w-full z-10"
       >
         <svg
           width="16"
@@ -44,6 +66,26 @@ const Search: FunctionComponent = () => {
           type="search"
           placeholder="Поиск пиццы..."
         />
+
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="absolute top-full left-0 right-0 mt-2.5 py-3 bg-white rounded-2xl overflow-hidden"
+        >
+          <ul>
+            <li className="bg-[#FFFAF6] px-5 py-2.5 flex items-center gap-3">
+              <img
+                src="/pizza.avif"
+                alt="product-item"
+                className="w-7.5 h-7.5 object-cover"
+              />
+
+              <p className="flex gap-3.5 items-center flex-wrap">
+                <HighlightText text={q} searchValue={searchValue} />
+                <span className="text-[14px] text-[#858585]">179₽</span>
+              </p>
+            </li>
+          </ul>
+        </div>
       </div>
     </>
   );
