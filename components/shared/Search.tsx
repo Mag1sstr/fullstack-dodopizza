@@ -71,8 +71,10 @@ const Search: FunctionComponent = () => {
         <div
           onClick={(e) => e.stopPropagation()}
           className={clsx(
-            "absolute top-full left-0 right-0 mt-2.5 py-3 bg-white rounded-2xl overflow-hidden max-h-0 transition-all invisible",
-            !!useDebounce(searchValue).length && "visible max-h-[500px]"
+            "absolute top-full left-0 right-0 mt-2.5 py-3 bg-white rounded-2xl overflow-hidden max-h-0 invisible",
+            !!searchValue.length &&
+              products &&
+              "visible max-h-[500px] transition-all"
           )}
         >
           {isLoading && (
@@ -82,7 +84,7 @@ const Search: FunctionComponent = () => {
             {products?.map((product) => (
               <li
                 key={product.id}
-                className="bg-[#FFFAF6] px-5 py-2.5 flex items-center gap-3"
+                className="bg-[#FFFAF6] px-5 py-2.5 flex items-center gap-3 cursor-[url('/pointer.png'),_pointer]"
               >
                 <img
                   src="/pizza.avif"
