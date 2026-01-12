@@ -1,8 +1,11 @@
-import { FunctionComponent } from "react";
+"use client";
+import { useFilters } from "@/store/useFilters";
+import { FunctionComponent, useState } from "react";
 
 interface FiltersProps {}
 
 const Filters: FunctionComponent<FiltersProps> = () => {
+  const { rangeValue, setRangeValue } = useFilters();
   return (
     <div className="w-[244px]">
       <h3 className="font-bold text-[1.40rem] mb-[1.5rem]">Фильтрация</h3>
@@ -28,7 +31,14 @@ const Filters: FunctionComponent<FiltersProps> = () => {
         <p className="mb-4 font-bold">Цена от и до:</p>
         <div className="flex gap-4">
           <span className="block flex items-center  w-[90px] py-2.5 px-4 rounded-2xl border">
-            <input type="number" className="w-full outline-none text-[14px]" />
+            <input
+              type="number"
+              className="w-full outline-none text-[14px]"
+              value={rangeValue.min}
+              onChange={(e) =>
+                setRangeValue({ ...rangeValue, min: e.target.value })
+              }
+            />
 
             <svg
               width="11"
@@ -44,7 +54,14 @@ const Filters: FunctionComponent<FiltersProps> = () => {
             </svg>
           </span>
           <span className="block flex items-center  w-[90px] py-2.5 px-4 rounded-2xl border">
-            <input type="number" className="w-full outline-none text-[14px]" />
+            <input
+              type="number"
+              className="w-full outline-none text-[14px]"
+              value={rangeValue.max}
+              onChange={(e) =>
+                setRangeValue({ ...rangeValue, max: e.target.value })
+              }
+            />
 
             <svg
               width="11"

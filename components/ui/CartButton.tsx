@@ -7,7 +7,7 @@ const CartButton: FunctionComponent = () => {
   return (
     <button
       onClick={() => setOpenCart(true)}
-      className="group relative bg-[var(--orange)] text-white font-[700] py-[12px] px-[23px] h-[50px] flex items-center gap-3 rounded-xl cursor-pointer"
+      className="group relative bg-[var(--orange)] text-white font-[700] py-[12px] px-[23px] h-[50px] flex items-center gap-3 rounded-xl cursor-[url('/pointer.png'),_pointer]"
     >
       <img
         className="w-8 absolute top-[50%] right-6 translate-y-[-50%] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
