@@ -26,7 +26,7 @@ const pizzas = [
   {
     name: "Пепперони",
     price: 550,
-    imageUrl: "/images/pizza/pepperoni.png",
+    imageUrl: "/images/pizza/pepperoni.avif",
     ingredients: ["Томатный соус", "Моцарелла", "Пепперони"],
     items: [
       { price: 450, size: 25, pizzaType: 1 },
@@ -37,7 +37,7 @@ const pizzas = [
   {
     name: "Маргарита",
     price: 480,
-    imageUrl: "/images/pizza/margarita.png",
+    imageUrl: "/images/pizza/marga.avif",
     ingredients: ["Томатный соус", "Моцарелла", "Базилик"],
     items: [
       { price: 380, size: 25, pizzaType: 1 },
@@ -45,13 +45,53 @@ const pizzas = [
     ],
   },
   {
-    name: "Четыре сыра",
+    name: "Двойной цыпленок",
     price: 620,
-    imageUrl: "/images/pizza/4cheese.png",
+    imageUrl: "/images/pizza/cipa.avif",
     ingredients: ["Моцарелла", "Пармезан", "Дор Блю", "Чеддер"],
     items: [
       { price: 520, size: 25, pizzaType: 2 },
       { price: 620, size: 30, pizzaType: 2 },
+    ],
+  },
+  {
+    name: "Сырная",
+    price: 500,
+    imageUrl: "/images/pizza/cheese.avif",
+    ingredients: ["Моцарелла", "Пармезан", "Чеддер"],
+    items: [
+      { price: 420, size: 25, pizzaType: 1 },
+      { price: 500, size: 30, pizzaType: 1 },
+    ],
+  },
+  {
+    name: "Ветчина и сыр",
+    price: 590,
+    imageUrl: "/images/pizza/vet.avif",
+    ingredients: ["Томатный соус", "Моцарелла", "Пепперони"],
+    items: [
+      { price: 490, size: 25, pizzaType: 2 },
+      { price: 590, size: 30, pizzaType: 2 },
+    ],
+  },
+  {
+    name: "Гавайская",
+    price: 540,
+    imageUrl: "/images/pizza/gavai.avif",
+    ingredients: ["Моцарелла", "Пармезан"],
+    items: [
+      { price: 440, size: 25, pizzaType: 1 },
+      { price: 540, size: 30, pizzaType: 1 },
+    ],
+  },
+  {
+    name: "Терияки",
+    price: 510,
+    imageUrl: "/images/pizza/ter.avif",
+    ingredients: ["Томатный соус", "Моцарелла", "Базилик"],
+    items: [
+      { price: 410, size: 25, pizzaType: 1 },
+      { price: 510, size: 30, pizzaType: 1 },
     ],
   },
 ];
