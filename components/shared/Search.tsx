@@ -45,7 +45,7 @@ const Search: FunctionComponent = () => {
       <div
         ref={searchRef}
         onClick={handleClick}
-        className="relative flex items-center gap-[12px] py-4 px-5 bg-[var(--search-bg)] rounded-2xl max-w-[764px] w-full z-10"
+        className="relative flex items-center gap-[12px] py-4 px-5 bg-[var(--search-bg)] rounded-2xl flex-1 z-10"
       >
         <svg
           width="16"

@@ -4,14 +4,23 @@ import Search from "./Search";
 import Link from "next/link";
 import CartButton from "../ui/CartButton";
 import ProfileBtn from "../ui/ProfileBtn";
+import clsx from "clsx";
 
-interface HeaderProps {}
+interface HeaderProps {
+  background?: string;
+}
 
-const Header: FunctionComponent<HeaderProps> = () => {
+const Header: FunctionComponent<HeaderProps> = ({ background }) => {
   return (
-    <header className="bg-white rounded-tl-[30px] rounded-tr-[30px] border-b-[1px] border-[#EDEDED]">
+    <header
+      style={{ background }}
+      className={clsx(
+        "bg-white rounded-tl-[30px] rounded-tr-[30px] border-b-[1px] border-[#EDEDED]",
+        background && "border-[#DEDEDE]"
+      )}
+    >
       <div className="container">
-        <div className="flex items-center justify-between py-8">
+        <div className="flex items-center justify-between py-8 gap-4">
           <Link href="/">
             <div className="flex items-center gap-4">
               <Image src="/logo.png" alt="logo" width={32} height={32} />
