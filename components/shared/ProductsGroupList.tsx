@@ -24,7 +24,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
     }
   );
 
-  const { setCategory, userSelectCategory } = useStore();
+  const { setCategory, userSelectCategory, setSelectProduct } = useStore();
   const { setOpenProductModal } = useModals();
   const { typeSort, rangeValue, setRangeValue } = useFilters();
 
@@ -90,7 +90,10 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
                   от <strong>{product.price} ₽</strong>
                 </p>
                 <button
-                  onClick={() => setOpenProductModal(true)}
+                  onClick={() => {
+                    setSelectProduct(product);
+                    setOpenProductModal(true);
+                  }}
                   className="flex items-center justify-center gap-2.5 px-5 py-2.5 bg-(--image-bg) rounded-2xl cursor-pointer text-(--orange)"
                 >
                   <svg

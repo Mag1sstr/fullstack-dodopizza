@@ -1,5 +1,6 @@
 "use client";
 import { useModals } from "@/providers/ModalsContextProvider";
+import { useStore } from "@/store/useStore";
 import { TPizzaTypes } from "@/types";
 import clsx from "clsx";
 import { FunctionComponent, useState } from "react";
@@ -10,6 +11,7 @@ const SIZEZ: { name: string; type: TPizzaTypes }[] = [
   { name: "Большая", type: "lg" },
 ];
 const ProductModal: FunctionComponent = () => {
+  const { selectProduct } = useStore();
   const { openProductModal, setOpenProductModal } = useModals();
   const [pizzaSize, setPizzaSize] = useState<TPizzaTypes>("sm");
 
@@ -50,15 +52,18 @@ const ProductModal: FunctionComponent = () => {
           <div className="w-[450px] h-[450px] border rounded-[50%] border-dashed flex items-center justify-center">
             <div className="w-[375px] h-[375px] border rounded-[50%] border-dashed flex items-center justify-center">
               <img
-                className={clsx("transition-all", SIZE_TYPE[pizzaSize])}
-                src="/pizza.avif"
+                className={clsx(
+                  "transition-all w-[320px] object-contain",
+                  SIZE_TYPE[pizzaSize]
+                )}
+                src={selectProduct?.imageUrl}
                 alt="pizza"
               />
             </div>
           </div>
         </div>
         <div className="w-1/2 bg-[#F4F1EE] p-10 flex flex-col">
-          <h1 className="font-bold text-[1.5rem]">Пепперони фреш</h1>
+          <h1 className="font-bold text-[1.5rem]">{selectProduct?.name}</h1>
           <p className="text-[0.90rem] text-[#777777] mb-5">
             25 см, традиционное тесто 25, 380 г
           </p>
@@ -93,7 +98,7 @@ const ProductModal: FunctionComponent = () => {
           <p className="text-[1.13rem] mb-4">Добавить по вкусу</p>
 
           <button className="w-full py-4 bg-(--orange) rounded-3xl text-white mt-auto">
-            Добавить в корзину за 799₽
+            Добавить в корзину за {selectProduct?.price}₽
           </button>
         </div>
       </div>
