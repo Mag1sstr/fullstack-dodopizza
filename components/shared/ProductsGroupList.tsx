@@ -5,6 +5,7 @@ import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
 import { FunctionComponent, useEffect, useRef } from "react";
+import { toast } from "react-toastify";
 import { useIntersection } from "react-use";
 
 interface ProductsGroupListProps {

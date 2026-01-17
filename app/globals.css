@@ -91,6 +91,8 @@
   --filter-bg: #f9fafb;
   --dark-gray: #ececec;
   --image-bg: #fff7ee;
+
+  --toastify-toast-width: 300px;
 }
 
 .dark {
