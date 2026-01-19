@@ -3,6 +3,8 @@ import { useModals } from "@/providers/ModalsContextProvider";
 import { useFilters } from "@/store/useFilters";
 import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import Image from "next/image";
 import { FunctionComponent, useEffect, useRef } from "react";
 import { useIntersection } from "react-use";
@@ -16,6 +18,14 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
   title,
   data,
 }) => {
+  // const { data: category } = useQuery({
+  //   queryKey: ["singleCategory"],
+  //   queryFn: () =>
+  //     axios
+  //       .get(`http://localhost:3000/api/categories/${data[0].categoryId}`)
+  //       .then((res) => res.data),
+  // });
+
   const intersectionRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(
     intersectionRef as React.RefObject<HTMLElement>,
