@@ -5,7 +5,6 @@ import { useStore } from "@/store/useStore";
 import { IPropduct } from "@/types";
 import Image from "next/image";
 import { FunctionComponent, useEffect, useRef } from "react";
-import { toast } from "react-toastify";
 import { useIntersection } from "react-use";
 
 interface ProductsGroupListProps {
@@ -22,7 +21,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
     intersectionRef as React.RefObject<HTMLElement>,
     {
       threshold: 0.4,
-    }
+    },
   );
 
   const { setCategory, userSelectCategory, setSelectProduct } = useStore();
@@ -72,7 +71,7 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12.5 ">
         {productsData
           ?.filter(
-            (el) => el.price >= +rangeValue.min && el.price <= +rangeValue.max
+            (el) => el.price >= +rangeValue.min && el.price <= +rangeValue.max,
           )
           .map((product) => (
             <li key={product.id}>
