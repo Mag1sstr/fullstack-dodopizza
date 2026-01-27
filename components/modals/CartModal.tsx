@@ -14,14 +14,16 @@ const CartModal: FunctionComponent = () => {
     <div
       className={clsx(
         "fixed inset-0 bg-(--modal-bg) flex justify-end invisible opacity-0 z-50 transition-all",
-        openCart && "opacity-100 visible"
+        openCart && "opacity-100 visible",
       )}
+      onMouseDown={() => setOpenCart(false)}
     >
       <div
         className={clsx(
-          "w-[395px] h-full bg-[#F4F1EE]",
-          openCart ? "translate-x-0" : "translate-x-full"
+          "w-[395px] h-full bg-[#F4F1EE] transition-all",
+          openCart ? "translate-x-0" : "translate-x-full",
         )}
+        onMouseDown={(e) => e.stopPropagation()}
       >
         {cartLenght ? (
           <>
