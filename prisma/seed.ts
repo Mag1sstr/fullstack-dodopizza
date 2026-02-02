@@ -22,7 +22,7 @@ const ingredientsData = [
   { name: "Чеддер", price: 90, imageUrl: "/images/ingredients/cheddar.png" },
 ];
 
-const pizzas = [
+const productsData = [
   {
     name: "Пепперони",
     price: 550,
@@ -94,6 +94,46 @@ const pizzas = [
       { price: 510, size: 30, pizzaType: 1 },
     ],
   },
+  {
+    name: "Кока-Кола",
+    price: 190,
+    imageUrl: "/images/drinks/coca-cola.avif",
+    ingredients: ["Газированная вода", "Сахар", "Карамельный краситель"],
+    items: [
+      { price: 150, size: 330, drinkType: 1 },
+      { price: 190, size: 500, drinkType: 1 },
+    ],
+  },
+  {
+    name: "Апельсиновый сок",
+    price: 210,
+    imageUrl: "/images/drinks/orange-juice.avif",
+    ingredients: ["Апельсиновый сок"],
+    items: [
+      { price: 180, size: 300, drinkType: 1 },
+      { price: 210, size: 500, drinkType: 1 },
+    ],
+  },
+  {
+    name: "Минеральная вода",
+    price: 140,
+    imageUrl: "/images/drinks/water.avif",
+    ingredients: ["Минеральная вода"],
+    items: [
+      { price: 120, size: 500, drinkType: 1 },
+      { price: 140, size: 1000, drinkType: 1 },
+    ],
+  },
+  {
+    name: "Холодный чай Лимон",
+    price: 170,
+    imageUrl: "/images/drinks/ice-tea-lemon.avif",
+    ingredients: ["Чай", "Лимон", "Сахар"],
+    items: [
+      { price: 150, size: 400, drinkType: 1 },
+      { price: 170, size: 600, drinkType: 1 },
+    ],
+  },
 ];
 
 async function main() {
@@ -111,20 +151,20 @@ async function main() {
     });
   }
 
-  for (const pizza of pizzas) {
+  for (const product of productsData) {
     await prismaClient.product.create({
       data: {
-        name: pizza.name,
-        price: pizza.price,
-        imageUrl: pizza.imageUrl,
+        name: product.name,
+        price: product.price,
+        imageUrl: product.imageUrl,
         categoryId: category.id,
 
         ingredients: {
-          connect: pizza.ingredients.map((name) => ({ name })),
+          connect: product.ingredients.map((name) => ({ name })),
         },
 
         items: {
-          create: pizza.items,
+          create: product.items,
         },
       },
     });
