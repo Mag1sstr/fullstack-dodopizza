@@ -1,5 +1,7 @@
 import { prismaClient } from "./prisma-client";
 
+const categories = ["Пицца", "Закуски", "Напитки"];
+
 const ingredientsData = [
   {
     name: "Томатный соус",
@@ -22,7 +24,7 @@ const ingredientsData = [
   { name: "Чеддер", price: 90, imageUrl: "/images/ingredients/cheddar.png" },
 ];
 
-const productsData = [
+const pizzas = [
   {
     name: "Пепперони",
     price: 550,
@@ -94,6 +96,8 @@ const productsData = [
       { price: 510, size: 30, pizzaType: 1 },
     ],
   },
+];
+const drinks = [
   {
     name: "Кока-Кола",
     price: 190,
@@ -137,11 +141,15 @@ const productsData = [
 ];
 
 async function main() {
-  const category = await prismaClient.category.upsert({
-    where: { name: "Пицца" },
-    update: {},
-    create: { name: "Пицца" },
-  });
+  await Promise.all(
+    categories.map((name) => {
+      return prismaClient.category.upsert({
+        where: { name },
+        update: {},
+        create: { name },
+      });
+    }),
+  );
 
   for (const ingredient of ingredientsData) {
     await prismaClient.ingredient.upsert({
@@ -151,20 +159,38 @@ async function main() {
     });
   }
 
-  for (const product of productsData) {
+  for (const pizza of pizzas) {
     await prismaClient.product.create({
       data: {
-        name: product.name,
-        price: product.price,
-        imageUrl: product.imageUrl,
-        categoryId: category.id,
+        name: pizza.name,
+        price: pizza.price,
+        imageUrl: pizza.imageUrl,
+        category: { connect: { name: "Пицца" } },
 
         ingredients: {
-          connect: product.ingredients.map((name) => ({ name })),
+          connect: pizza.ingredients.map((name) => ({ name })),
         },
 
         items: {
-          create: product.items,
+          create: pizza.items,
+        },
+      },
+    });
+  }
+  for (const drink of drinks) {
+    await prismaClient.product.create({
+      data: {
+        name: drink.name,
+        price: drink.price,
+        imageUrl: drink.imageUrl,
+        category: { connect: { name: "Напитки" } },
+
+        ingredients: {
+          connect: drink.ingredients.map((name) => ({ name })),
+        },
+
+        items: {
+          create: drink.items,
         },
       },
     });

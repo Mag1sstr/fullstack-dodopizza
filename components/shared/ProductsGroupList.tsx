@@ -18,14 +18,6 @@ const ProductsGroupList: FunctionComponent<ProductsGroupListProps> = ({
   title,
   data,
 }) => {
-  // const { data: category } = useQuery({
-  //   queryKey: ["singleCategory"],
-  //   queryFn: () =>
-  //     axios
-  //       .get(`http://localhost:3000/api/categories/${data[0].categoryId}`)
-  //       .then((res) => res.data),
-  // });
-
   const intersectionRef = useRef<HTMLDivElement>(null);
   const intersection = useIntersection(
     intersectionRef as React.RefObject<HTMLElement>,
