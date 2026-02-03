@@ -1,9 +1,11 @@
 "use client";
 import { useModals } from "@/providers/ModalsContextProvider";
+import { useCart } from "@/store/useCart";
 import { useStore } from "@/store/useStore";
 import { TPizzaTypes } from "@/types";
 import clsx from "clsx";
 import { FunctionComponent, useState } from "react";
+import { toast } from "react-toastify";
 
 const SIZEZ: { name: string; type: TPizzaTypes }[] = [
   { name: "Маленькая", type: "sm" },
@@ -13,12 +15,22 @@ const SIZEZ: { name: string; type: TPizzaTypes }[] = [
 const ProductModal: FunctionComponent = () => {
   const { selectProduct } = useStore();
   const { openProductModal, setOpenProductModal } = useModals();
+  const { cart, addToCart } = useCart();
   const [pizzaSize, setPizzaSize] = useState<TPizzaTypes>("sm");
 
   const SIZE_TYPE = {
     sm: "scale-100",
     md: "scale-130",
     lg: "scale-155",
+  };
+
+  const isInCart = cart.some((el) => el.id === selectProduct?.id);
+
+  const handleAddToCart = () => {
+    if (!selectProduct || isInCart) return;
+    addToCart({ ...selectProduct, count: 1 });
+    toast.success("Добавлено в корзину 🛒");
+    setOpenProductModal(false);
   };
 
   return (
@@ -54,7 +66,7 @@ const ProductModal: FunctionComponent = () => {
               <img
                 className={clsx(
                   "transition-all w-[320px] object-contain",
-                  SIZE_TYPE[pizzaSize]
+                  SIZE_TYPE[pizzaSize],
                 )}
                 src={selectProduct?.imageUrl}
                 alt="pizza"
@@ -74,18 +86,12 @@ const ProductModal: FunctionComponent = () => {
                 key={item.name}
                 className={clsx(
                   "py-2  text-[0.90rem] rounded-3xl flex-1 text-center cursor-pointer",
-                  pizzaSize === item.type && "bg-white"
+                  pizzaSize === item.type && "bg-white",
                 )}
               >
                 {item.name}
               </li>
             ))}
-            {/* <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
-              Средняя
-            </li>
-            <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
-              Большая
-            </li> */}
           </ul>
           <ul className="bg-(--dark-gray) p-0.5 rounded-3xl flex mb-7.5">
             <li className="py-2 bg-white text-[0.90rem] rounded-3xl flex-1 text-center">
@@ -97,7 +103,10 @@ const ProductModal: FunctionComponent = () => {
           </ul>
           <p className="text-[1.13rem] mb-4">Добавить по вкусу</p>
 
-          <button className="w-full py-4 bg-(--orange) rounded-3xl text-white mt-auto">
+          <button
+            onClick={handleAddToCart}
+            className="w-full py-4 bg-(--orange) rounded-3xl text-white mt-auto"
+          >
             Добавить в корзину за {selectProduct?.price}₽
           </button>
         </div>

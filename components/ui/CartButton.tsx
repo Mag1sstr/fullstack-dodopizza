@@ -1,9 +1,12 @@
 "use client";
+import { cartTotalPrice } from "@/helpers/cartTotalPrice";
 import { useModals } from "@/providers/ModalsContextProvider";
+import { useCart } from "@/store/useCart";
 import { FunctionComponent } from "react";
 
 const CartButton: FunctionComponent = () => {
   const { setOpenCart } = useModals();
+  const { cart } = useCart();
   return (
     <button
       onClick={() => setOpenCart(true)}
@@ -14,7 +17,7 @@ const CartButton: FunctionComponent = () => {
         src="/arrow.svg"
         alt="arrow"
       />
-      <b>520 ₽</b>
+      <b>{cartTotalPrice()} ₽</b>
       <span className="block h-full w-[1px] bg-white opacity-25"></span>
       <div className="flex items-center gap-2 transition-opacity group-hover:opacity-0">
         <svg
@@ -46,7 +49,7 @@ const CartButton: FunctionComponent = () => {
             strokeLinejoin="round"
           />
         </svg>
-        3
+        {cart.length}
       </div>
     </button>
   );
