@@ -27,14 +27,14 @@ export const useCart = create<ICartStore>((set) => ({
   increaseCartItem: (id) =>
     set((state) => ({
       cart: state.cart.map((el) =>
-        el.id === id ? { ...el, count: el.count++ } : el,
+        el.id === id ? { ...el, count: el.count + 1 } : el,
       ),
     })),
   decreaseCartItem: (id) =>
     set((state) => ({
       cart: state.cart.map((el) =>
         el.id === id
-          ? { ...el, count: el.count > 1 ? el.count-- : el.count }
+          ? { ...el, count: el.count > 1 ? el.count - 1 : el.count }
           : el,
       ),
     })),

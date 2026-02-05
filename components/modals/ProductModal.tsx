@@ -15,7 +15,7 @@ const SIZEZ: { name: string; type: TPizzaTypes }[] = [
 const ProductModal: FunctionComponent = () => {
   const { selectProduct } = useStore();
   const { openProductModal, setOpenProductModal } = useModals();
-  const { cart, addToCart } = useCart();
+  const { addToCart } = useCart();
   const [pizzaSize, setPizzaSize] = useState<TPizzaTypes>("sm");
 
   const SIZE_TYPE = {
@@ -24,10 +24,8 @@ const ProductModal: FunctionComponent = () => {
     lg: "scale-155",
   };
 
-  const isInCart = cart.some((el) => el.id === selectProduct?.id);
-
   const handleAddToCart = () => {
-    if (!selectProduct || isInCart) return;
+    if (!selectProduct) return;
     addToCart({ ...selectProduct, count: 1 });
     toast.success("Добавлено в корзину 🛒");
     setOpenProductModal(false);
@@ -105,7 +103,7 @@ const ProductModal: FunctionComponent = () => {
 
           <button
             onClick={handleAddToCart}
-            className="w-full py-4 bg-(--orange) rounded-3xl text-white mt-auto"
+            className="w-full py-4 bg-(--orange) rounded-3xl text-white mt-auto cursor-pointer"
           >
             Добавить в корзину за {selectProduct?.price}₽
           </button>
