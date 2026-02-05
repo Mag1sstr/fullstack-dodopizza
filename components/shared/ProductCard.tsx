@@ -47,7 +47,7 @@ const ProductCard: FunctionComponent<ProductCardProps> = ({ product }) => {
           <div className="flex gap-3 font-bold text-[1.25rem]">
             <button
               onClick={handleDecCartItem}
-              className="group cursor-pointer"
+              className="group cursor-pointer active:scale-95 transition-all"
             >
               <svg
                 width="38"
