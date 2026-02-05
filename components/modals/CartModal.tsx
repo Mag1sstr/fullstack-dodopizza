@@ -1,5 +1,6 @@
 "use client";
 import { useModals } from "@/providers/ModalsContextProvider";
+import { useCart } from "@/store/useCart";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { FunctionComponent } from "react";
@@ -8,8 +9,7 @@ const CartModal: FunctionComponent = () => {
   const { openCart, setOpenCart } = useModals();
   const router = useRouter();
 
-  const cartLenght = false;
-
+  const { cart } = useCart();
   return (
     <div
       className={clsx(
@@ -25,11 +25,11 @@ const CartModal: FunctionComponent = () => {
         )}
         onMouseDown={(e) => e.stopPropagation()}
       >
-        {cartLenght ? (
+        {!!cart.length ? (
           <>
             <div className="flex justify-between items-center">
               <h1 className="p-5 text-[1.25rem] [&>span]:font-bold">
-                В корзине <span>3 товара</span>
+                В корзине <span>{cart.length} товара</span>
               </h1>
               <button onClick={() => setOpenCart(false)}>
                 <svg
@@ -48,135 +48,81 @@ const CartModal: FunctionComponent = () => {
               </button>
             </div>
             <ul className="flex flex-col gap-2.5">
-              <li className="p-5 bg-white flex items-start gap-6">
-                <img src="/pizza.avif" className="max-w-[65px]" alt="pizza" />
-                <div>
-                  <h2 className="font-bold">Чизбургер-пицца</h2>
-                  <p className="text-[0.90rem] text-[#A1A1A1] pb-3 border-b border-[#EDEDED] mb-3">
-                    Средняя 30 см, традиционное тесто
-                  </p>
-                  <div className="flex items-center justify-between font-bold">
-                    <div className="flex gap-2 items-center">
-                      <button>
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 30 30"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            x="0.5"
-                            y="0.5"
-                            width="29"
-                            height="29"
-                            rx="9.5"
-                            fill="white"
-                            stroke="#FE5F00"
-                          />
-                          <path
-                            d="M19.2868 15L11.4297 15"
-                            stroke="#FE5F00"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </button>
-                      <p>2</p>
-                      <button>
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 30 30"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            x="0.5"
-                            y="0.5"
-                            width="29"
-                            height="29"
-                            rx="9.5"
-                            fill="white"
-                            stroke="#FE5F00"
-                          />
-                          <path
-                            d="M19.325 14.4644H15.8811V11.2501C15.8811 11.108 15.8207 10.9717 15.713 10.8713C15.6054 10.7708 15.4594 10.7144 15.3072 10.7144C15.1549 10.7144 15.0089 10.7708 14.9013 10.8713C14.7937 10.9717 14.7332 11.108 14.7332 11.2501V14.4644H11.2893C11.1371 14.4644 10.9911 14.5208 10.8834 14.6213C10.7758 14.7217 10.7153 14.858 10.7153 15.0001C10.7153 15.1422 10.7758 15.2784 10.8834 15.3789C10.9911 15.4793 11.1371 15.5358 11.2893 15.5358H14.7332V18.7501C14.7332 18.8922 14.7937 19.0284 14.9013 19.1289C15.0089 19.2293 15.1549 19.2858 15.3072 19.2858C15.4594 19.2858 15.6054 19.2293 15.713 19.1289C15.8207 19.0284 15.8811 18.8922 15.8811 18.7501V15.5358H19.325C19.4773 15.5358 19.6232 15.4793 19.7309 15.3789C19.8385 15.2784 19.899 15.1422 19.899 15.0001C19.899 14.858 19.8385 14.7217 19.7309 14.6213C19.6232 14.5208 19.4773 14.4644 19.325 14.4644Z"
-                            fill="#FE5F00"
-                          />
-                        </svg>
-                      </button>
+              {cart.map(({ id, name, imageUrl, count, price }) => (
+                <li key={id} className="p-5 bg-white flex items-start gap-6">
+                  <img
+                    src={imageUrl ?? ""}
+                    className="max-w-[65px]"
+                    alt="pizza"
+                  />
+                  <div>
+                    <h2 className="font-bold">{name}</h2>
+                    <p className="text-[0.90rem] text-[#A1A1A1] pb-3 border-b border-[#EDEDED] mb-3">
+                      Средняя 30 см, традиционное тесто
+                    </p>
+                    <div className="flex items-center justify-between font-bold">
+                      <div className="flex gap-2 items-center">
+                        <button>
+                          <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 30 30"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <rect
+                              x="0.5"
+                              y="0.5"
+                              width="29"
+                              height="29"
+                              rx="9.5"
+                              fill="white"
+                              stroke="#FE5F00"
+                            />
+                            <path
+                              d="M19.2868 15L11.4297 15"
+                              stroke="#FE5F00"
+                              strokeWidth="1.5"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </button>
+                        <p>{count}</p>
+                        <button>
+                          <svg
+                            width="30"
+                            height="30"
+                            viewBox="0 0 30 30"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <rect
+                              x="0.5"
+                              y="0.5"
+                              width="29"
+                              height="29"
+                              rx="9.5"
+                              fill="white"
+                              stroke="#FE5F00"
+                            />
+                            <path
+                              d="M19.325 14.4644H15.8811V11.2501C15.8811 11.108 15.8207 10.9717 15.713 10.8713C15.6054 10.7708 15.4594 10.7144 15.3072 10.7144C15.1549 10.7144 15.0089 10.7708 14.9013 10.8713C14.7937 10.9717 14.7332 11.108 14.7332 11.2501V14.4644H11.2893C11.1371 14.4644 10.9911 14.5208 10.8834 14.6213C10.7758 14.7217 10.7153 14.858 10.7153 15.0001C10.7153 15.1422 10.7758 15.2784 10.8834 15.3789C10.9911 15.4793 11.1371 15.5358 11.2893 15.5358H14.7332V18.7501C14.7332 18.8922 14.7937 19.0284 14.9013 19.1289C15.0089 19.2293 15.1549 19.2858 15.3072 19.2858C15.4594 19.2858 15.6054 19.2293 15.713 19.1289C15.8207 19.0284 15.8811 18.8922 15.8811 18.7501V15.5358H19.325C19.4773 15.5358 19.6232 15.4793 19.7309 15.3789C19.8385 15.2784 19.899 15.1422 19.899 15.0001C19.899 14.858 19.8385 14.7217 19.7309 14.6213C19.6232 14.5208 19.4773 14.4644 19.325 14.4644Z"
+                              fill="#FE5F00"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                      <p>{price * count} ₽ </p>
                     </div>
-                    <p>965 ₽ </p>
                   </div>
-                </div>
-              </li>
-              <li className="p-5 bg-white flex items-start gap-6">
-                <img src="/pizza.avif" className="max-w-[65px]" alt="pizza" />
-                <div>
-                  <h2 className="font-bold">Чизбургер-пицца</h2>
-                  <p className="text-[0.90rem] text-[#A1A1A1] pb-3 border-b border-[#EDEDED] mb-3">
-                    Средняя 30 см, традиционное тесто
-                  </p>
-                  <div className="flex items-center justify-between font-bold">
-                    <div className="flex gap-2 items-center">
-                      <button>
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 30 30"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            x="0.5"
-                            y="0.5"
-                            width="29"
-                            height="29"
-                            rx="9.5"
-                            fill="white"
-                            stroke="#FE5F00"
-                          />
-                          <path
-                            d="M19.2868 15L11.4297 15"
-                            stroke="#FE5F00"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                          />
-                        </svg>
-                      </button>
-                      <p>2</p>
-                      <button>
-                        <svg
-                          width="30"
-                          height="30"
-                          viewBox="0 0 30 30"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <rect
-                            x="0.5"
-                            y="0.5"
-                            width="29"
-                            height="29"
-                            rx="9.5"
-                            fill="white"
-                            stroke="#FE5F00"
-                          />
-                          <path
-                            d="M19.325 14.4644H15.8811V11.2501C15.8811 11.108 15.8207 10.9717 15.713 10.8713C15.6054 10.7708 15.4594 10.7144 15.3072 10.7144C15.1549 10.7144 15.0089 10.7708 14.9013 10.8713C14.7937 10.9717 14.7332 11.108 14.7332 11.2501V14.4644H11.2893C11.1371 14.4644 10.9911 14.5208 10.8834 14.6213C10.7758 14.7217 10.7153 14.858 10.7153 15.0001C10.7153 15.1422 10.7758 15.2784 10.8834 15.3789C10.9911 15.4793 11.1371 15.5358 11.2893 15.5358H14.7332V18.7501C14.7332 18.8922 14.7937 19.0284 14.9013 19.1289C15.0089 19.2293 15.1549 19.2858 15.3072 19.2858C15.4594 19.2858 15.6054 19.2293 15.713 19.1289C15.8207 19.0284 15.8811 18.8922 15.8811 18.7501V15.5358H19.325C19.4773 15.5358 19.6232 15.4793 19.7309 15.3789C19.8385 15.2784 19.899 15.1422 19.899 15.0001C19.899 14.858 19.8385 14.7217 19.7309 14.6213C19.6232 14.5208 19.4773 14.4644 19.325 14.4644Z"
-                            fill="#FE5F00"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                    <p>965 ₽ </p>
-                  </div>
-                </div>
-              </li>
+                </li>
+              ))}
             </ul>
-            <div>
-              <button onClick={() => router.push("/cart")}>
+            <div className="p-5">
+              <button
+                className="w-full py-4 bg-(--orange) text-white rounded-3xl"
+                onClick={() => router.push("/cart")}
+              >
                 Оформить заказ
               </button>
             </div>

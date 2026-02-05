@@ -51,6 +51,7 @@ function NotFoundPage() {
               </button>
             </div>
           </div>
+
           <img className="max-w-[340px]" src="/404.png" alt="404" />
         </div>
       </div>
