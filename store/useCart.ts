@@ -3,7 +3,7 @@ import { IPropduct } from "@/types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-interface ICart extends IPropduct {
+export interface ICart extends IPropduct {
   count: number;
 }
 

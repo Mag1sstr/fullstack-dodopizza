@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-
+// interface IProps
 function OrderItem() {
   const [open, setOpen] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
