@@ -1,7 +1,26 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
+
 function OrderItem() {
+  const [open, setOpen] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+
+    if (open) {
+      el.style.height = el.scrollHeight + "px";
+    } else {
+      el.style.height = "0px";
+    }
+  }, [open]);
+
   return (
     <li className="bg-white rounded-4xl py-7 px-9 max-w-[752px]">
-      <div className="flex items-center justify-between cursor-pointer">
+      <div
+        onClick={() => setOpen((prev) => !prev)}
+        className="flex items-center justify-between cursor-pointer"
+      >
         <div className="flex items-center gap-5">
           <h2 className="text-2xl font-bold">Заказ #16</h2>
           <p className="text-[#AEAEAE] ">14 февраля 2024, в 17:45</p>
@@ -10,7 +29,7 @@ function OrderItem() {
           <p className="py-2 px-4 rounded-2xl bg-[#EAF8F4] text-[#1BB486] text-[14px] font-semibold">
             Оплачено
           </p>
-          <button className="rotate-180 ">
+          <button className={`rotate-180 ${open && "rotate-360"}`}>
             <svg
               width="16"
               height="10"
@@ -26,7 +45,24 @@ function OrderItem() {
           </button>
         </div>
       </div>
-      <div className=""></div>
+      <div ref={contentRef} className="overflow-hidden transition-all">
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+        <h1>wdwdwd</h1>
+      </div>
     </li>
   );
 }
